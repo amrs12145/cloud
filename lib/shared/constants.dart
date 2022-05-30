@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class Constants {
   static const EdgeInsets padding = EdgeInsets.all(16.0);
   static const Widget verticleSpacing = SizedBox(height: 16.0);
+  static const Widget verticleSpacingS = SizedBox(height: 6.0);
   static const Widget horizontalSpacing = SizedBox(width: 16.0);
   static Color? primary = Colors.blue[800];
   static BorderRadius radius = const BorderRadius.all(Radius.circular(16));
@@ -14,6 +15,9 @@ class Constants {
     color: Colors.grey,
   );
 
+  static const String local = '';
   static const String loginPath = '';
   static const String registerPath = '';
+  static const String addProduct = '';
+  static const String getProducts = '';
 }

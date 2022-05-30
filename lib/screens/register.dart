@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
-import 'package:cloud/controller/register_controller.dart';
+import 'package:cloud/controller/controller.dart';
 import 'package:cloud/models/user.dart';
 import 'package:cloud/screens/login.dart';
 import 'package:cloud/shared/constants.dart';
@@ -19,9 +19,12 @@ class Regisger extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: Icon(
-          Icons.arrow_back,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
           color: Constants.primary,
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
       ),
       body: ListView(

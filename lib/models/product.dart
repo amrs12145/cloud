@@ -1,11 +1,11 @@
 class Product {
-  final String? title;
-  final String? desc;
-  final String? img;
-  final List<String>? categories;
-  final int? size;
-  final String? color;
-  final double? price;
+  String? title;
+  String? desc;
+  String? img;
+  List<String>? categories;
+  int? size;
+  String? color;
+  double? price;
 
   Product({
     this.title,
@@ -16,4 +16,18 @@ class Product {
     this.color,
     this.price,
   });
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> map = {
+      "title": title,
+      "desc": desc,
+      "img": img,
+      "categories": categories,
+      "size": size,
+      "color": color,
+      "price": price,
+    };
+    map.removeWhere((key, value) => value == null);
+    return map;
+  }
 }
