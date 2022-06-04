@@ -78,6 +78,7 @@ class AddProduct extends StatelessWidget {
               _product.price = double.tryParse(_price.text);
 
               Controller.addProduct(_product);
+              Navigator.of(context).pop(true);
             },
             child: Text('Add product'),
           ),

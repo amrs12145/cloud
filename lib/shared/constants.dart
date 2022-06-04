@@ -15,9 +15,9 @@ class Constants {
     color: Colors.grey,
   );
 
-  static const String local = '';
-  static const String loginPath = '';
-  static const String registerPath = '';
-  static const String addProduct = '';
-  static const String getProducts = '';
+  static const String local = 'https://629b5d86cf163ceb8d186cd2.mockapi.io/';
+  static const String loginPath = 'users';
+  static const String registerPath = 'users';
+  static const String addProduct = 'products';
+  static const String getProducts = 'products';
 }

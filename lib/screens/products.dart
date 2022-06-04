@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud/controller/controller.dart';
 import 'package:cloud/models/product.dart';
 import 'package:cloud/screens/add_product.dart';
+import 'package:cloud/screens/product_details.dart';
 import 'package:cloud/shared/constants.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class ProductList extends StatelessWidget {
@@ -41,49 +44,33 @@ class ProductList extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: ListView(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: buildProduct(),
-                    ),
-                    Expanded(
-                      child: buildProduct(),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: buildProduct(),
-                    ),
-                    Expanded(
-                      child: buildProduct(),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: buildProduct(),
-                    ),
-                    Expanded(
-                      child: buildProduct(),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: buildProduct(),
-                    ),
-                    Expanded(
-                      child: buildProduct(),
-                    ),
-                  ],
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FutureBuilder(
+                future: Controller.getProducts(),
+                builder: (context, AsyncSnapshot<List<Product>> snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done)
+                    return CircularProgressIndicator();
+
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      if (index == 0) index++;
+                      return Row(
+                        children: [
+                          Expanded(
+                            child: buildProduct(
+                                snapshot.data![index - 1], context),
+                          ),
+                          Expanded(
+                            child: buildProduct(snapshot.data![index], context),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ],
@@ -139,7 +126,7 @@ class _NavbarState extends State<Navbar> {
   }
 }
 
-Widget buildProduct() {
+Widget buildProduct(Product product, BuildContext context) {
   return Card(
     margin: Constants.padding,
     elevation: 20,
@@ -149,11 +136,11 @@ Widget buildProduct() {
     child: Column(
       children: [
         Image.network(
-          'https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg',
+          product.img!,
         ),
         Constants.verticleSpacingS,
         Text(
-          'name',
+          product.title!,
           style: TextStyle(fontSize: 19),
         ),
         Constants.verticleSpacingS,
@@ -161,7 +148,7 @@ Widget buildProduct() {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              '169',
+              product.price!.toString(),
               style: TextStyle(
                 decoration: TextDecoration.lineThrough,
                 color: Colors.grey,
@@ -169,14 +156,24 @@ Widget buildProduct() {
             ),
             Constants.horizontalSpacing,
             Text(
-              '250',
+              ((product.price! + 50).toString() + '\$'),
             ),
           ],
         ),
         Constants.verticleSpacingS,
         ElevatedButton(
-          onPressed: () {},
-          child: Text('+ ADD'),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return ProductDetails(
+                    product: product,
+                  );
+                },
+              ),
+            );
+          },
+          child: Text('+ Show'),
           style: ElevatedButton.styleFrom(
             primary: Colors.redAccent,
           ),

@@ -5,6 +5,7 @@ import 'package:cloud/models/user.dart';
 import 'package:cloud/screens/register.dart';
 import 'package:cloud/shared/constants.dart';
 import 'package:cloud/shared/fields.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -18,6 +19,12 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back_ios, color: Colors.black),
+        ),
         backgroundColor: Colors.white,
       ),
       body: ListView(
@@ -58,7 +65,7 @@ class Login extends StatelessWidget {
             onPressed: () {
               user.username = _username.text;
               user.password = _password.text;
-              Controller.login(user);
+              Controller.login(user, context);
             },
             child: Text('LOGIN'),
           ),

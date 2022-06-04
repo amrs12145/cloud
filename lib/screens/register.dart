@@ -3,6 +3,7 @@
 import 'package:cloud/controller/controller.dart';
 import 'package:cloud/models/user.dart';
 import 'package:cloud/screens/login.dart';
+import 'package:cloud/screens/products.dart';
 import 'package:cloud/shared/constants.dart';
 import 'package:cloud/shared/fields.dart';
 import 'package:flutter/material.dart';
@@ -82,6 +83,13 @@ class Regisger extends StatelessWidget {
               user.email = _email.text;
               user.password = _password.text;
               Controller.register(user);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return ProductList();
+                  },
+                ),
+              );
             },
             child: const Text('CREATE'),
           ),

@@ -1,15 +1,27 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 
 import 'package:cloud/models/product.dart';
 import 'package:cloud/models/user.dart';
 import 'package:cloud/net/net.dart';
+import 'package:cloud/screens/products.dart';
 import 'package:cloud/shared/constants.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class Controller {
-  static void login(User user) async {
+  static void login(User user, BuildContext context) async {
     final response = await Net.dio.post(
-      Constants.loginPath,
-      data: jsonEncode({user.toJson()}),
+      Constants.registerPath,
+      data: user.toJson(),
+    );
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return ProductList();
+        },
+      ),
     );
 
     print(response.data);
@@ -18,7 +30,7 @@ class Controller {
   static void register(User user) async {
     final response = await Net.dio.post(
       Constants.registerPath,
-      data: jsonEncode(user.toJson()),
+      data: user.toJson(),
     );
 
     print(response.data);
@@ -33,12 +45,14 @@ class Controller {
     print(response.data);
   }
 
-  static void getProducts(Product product) async {
+  static Future<List<Product>> getProducts() async {
     final response = await Net.dio.get(
       Constants.getProducts,
-      queryParameters: product.toJson(),
+      // queryParameters: product.toJson(),
     );
 
     print(response.data);
+
+    return (response.data as List).map((e) => Product.fromJson(e)).toList();
   }
 }

@@ -2,6 +2,7 @@
 
 import 'package:cloud/screens/login.dart';
 import 'package:cloud/screens/products.dart';
+import 'package:cloud/screens/register.dart';
 import 'package:cloud/shared/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -31,50 +32,77 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () {},
-            child: Text('Login'),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.green,
+      body: Padding(
+        padding: Constants.padding,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/1.png',
+              width: 50,
+              height: 250,
             ),
-          ),
-          Constants.verticleSpacing,
-          ElevatedButton(
-            onPressed: () {},
-            child: Text('Register'),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.blue,
-            ),
-          ),
-          Spacer(),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (contxet) {
-                    return ProductList();
-                  },
-                ),
-              );
-            },
-            child: Text('Sign as a vistior'),
-            clipBehavior: Clip.hardEdge,
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              onPrimary: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+            Constants.verticleSpacing,
+            Constants.verticleSpacing,
+            Constants.verticleSpacing,
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (contxet) {
+                      return Login();
+                    },
+                  ),
+                );
+              },
+              child: Text('Login'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green,
               ),
             ),
-          ),
-          Constants.verticleSpacing,
-          Constants.verticleSpacing,
-          Constants.verticleSpacing,
-        ],
+            Constants.verticleSpacing,
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (contxet) {
+                      return Regisger();
+                    },
+                  ),
+                );
+              },
+              child: Text('Register'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue,
+              ),
+            ),
+            Constants.verticleSpacing,
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (contxet) {
+                      return ProductList();
+                    },
+                  ),
+                );
+              },
+              child: Text('Sign as a vistior'),
+              clipBehavior: Clip.hardEdge,
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                onPrimary: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            Constants.verticleSpacing,
+            Constants.verticleSpacing,
+            Constants.verticleSpacing,
+          ],
+        ),
       ),
     );
   }
